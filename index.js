@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var bouncy = require('bouncy');
 var url = require("url");
 
