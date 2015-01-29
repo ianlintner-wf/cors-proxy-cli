@@ -27,22 +27,20 @@ var server = bouncy(function (req, res, bounce) {
             console.log("bouncing to " + apiHost + ":" + apiPort);
             bounce(apiHost, apiPort, {
                 headers: {
-                    Connection: "close"
+                    Connection: "close",
+                    host: apiHost,
+                    port: apiPort
                 }
             });
+            return;
         }
-        else {
-            console.log("serving locally");
-            bounce("localhost", 8080, {
-                headers: {
-                    Connection: "close"
-                }
-            });
-        }
-        return;
     }
-    res.statusCode = 404;
-    res.end('no such host');
+    console.log("serving locally");
+    bounce("localhost", 8080, {
+        headers: {
+            Connection: "close"
+        }
+    });
 });
 server.listen(8000);
 
